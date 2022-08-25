@@ -1,14 +1,15 @@
 
 # LarnU cursos
 
-## Introduction
+## Introduccion
 
 Este proyecto fue diseñado para una prueba en donde se desarrollo un aplicacion con tecnologias FullStack, con el fin de poder crear una plataforma de cursos para los usuarios.
 
-## Project Objetives
+## Objetivos del proyecto
+Crear un software en una semana, en el cual se deberia poder
+listar, eliminar, crear y modificar los cursos
 
-
-## Stack of Technologies
+## Stack de tecnologias
 
 ### Front End:
 HTML, CSS, Javascript, React, React-Bootstrap, Redux Toolkit
