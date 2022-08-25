@@ -1,0 +1,15 @@
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+div h1 {
+    color: aliceblue;
+    margin-left: 45rem;
+    font-family: monospace;
+}
+
+.margin3 {
+    margin-top: 2rem;
+}

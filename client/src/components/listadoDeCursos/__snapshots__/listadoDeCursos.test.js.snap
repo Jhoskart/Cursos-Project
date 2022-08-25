@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CursoCard /> should render correctly 1`] = `
+<div>
+  <div
+    class="cards"
+  >
+    <div
+      class="card card1"
+    >
+      <div
+        class="container"
+      >
+        <img
+          alt="imagen del curso"
+          src="http://www.jorgehernandezramirez.com/wp-content/uploads/2017/07/nodelogo.png"
+        />
+      </div>
+      <div
+        class="details"
+      >
+        <h3>
+          Curso de NodeJS
+        </h3>
+        <div>
+          <button
+            class="btn btn-light"
+            type="button"
+          >
+            Mas informacion aqui
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`First elements should render a button to create a curso 1`] = `
+<div>
+  <div
+    class="margin3"
+  >
+    <h1>
+      LarnU Cursos👽
+    </h1>
+    <div
+      class="content"
+    />
+    <div
+      class="margin2"
+    >
+      <button
+        class="tamaño btn btn-primary"
+        type="button"
+      >
+        Crear Curso
+      </button>
+    </div>
+  </div>
+</div>
+`;

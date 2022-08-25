@@ -1,0 +1,25 @@
+.boxForImage {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #000;
+    margin-left: 7.5rem;
+    margin-bottom: 1rem;
+}
+
+.margin {
+    margin-left: 40px;
+    margin-top: 5rem;
+}
+
+.boxForImage2 {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 7.5rem;
+    margin-bottom: 1rem;
+}

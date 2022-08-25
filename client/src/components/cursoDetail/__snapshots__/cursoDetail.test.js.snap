@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CursoDetail /> should render correctly 1`] = `
+<div>
+  <div>
+    <button
+      class="btn btn-light"
+      type="button"
+    >
+      Mas informacion aqui
+    </button>
+  </div>
+</div>
+`;

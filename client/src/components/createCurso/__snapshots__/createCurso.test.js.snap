@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateCursos should render correctly 1`] = `
+<div>
+  <div
+    class="margin2"
+  >
+    <button
+      class="tamaño btn btn-primary"
+      type="button"
+    >
+      Crear Curso
+    </button>
+  </div>
+</div>
+`;

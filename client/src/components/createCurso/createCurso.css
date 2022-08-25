@@ -1,0 +1,23 @@
+.boxForImage {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #000;
+}
+
+.margin {
+    margin-left: 40px;
+    margin-top: 5rem;
+}
+
+.margin2 {
+    margin-left: 44rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tamaño {
+    width: 20rem;
+}
