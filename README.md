@@ -73,7 +73,7 @@ Debes reemplazar `postgresuser` y `postgrespassword` con tus propias credenciale
 
 # Para el testing db
 
-- You can find in `api/index.js`
+- Puedes encontrar en `api/index.js`
     + `conn.sync({ force: false })`, cambia entre " true " (si quieres que se recargue la base de datos ) o " false "( si no quieres que se recargue la base de datos ) 
 
 # Imagenes del proyectos
