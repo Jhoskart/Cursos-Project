@@ -19,10 +19,18 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const cursosCreator = require('./src/creators/cursosCreator.js');
+const { Cursos } = require('./src/db');
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  server.listen(process.env.PORT, async () => {
+
+    console.log(`server listening on port:${process.env.PORT}`); 
+
+    const cursos = await Cursos.findAll();
+    if (cursos.length < 1) cursosCreator(); 
   });
+}).catch(err => {
+  console.log(err);
 });

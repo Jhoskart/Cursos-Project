@@ -1,12 +1,10 @@
 const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const cursosRoutes = require('./CursosManager/cursosRoutes')
 
 
 const router = Router();
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+router.use('/cursos', cursosRoutes);
 
 
 module.exports = router;
