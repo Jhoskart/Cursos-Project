@@ -6,13 +6,13 @@ import { BrowserRouter as Router} from 'react-router-dom';
 
 function reducer(ui, 
     { 
-    preloadState,
-    store = configureStore({ reducer: { cursos: cursosSlice.reducer },
+    preloadState, // El estado inicial del store
+    store = configureStore({ reducer: { cursos: cursosSlice.reducer }, // El reducer del store
     preloadState }),
-    ...renderOptions
+    ...renderOptions // Opciones de renderizado
     } = {}
 ) {
-    function Wrapper ({ children}) {
+    function Wrapper ({ children}) { // Wrapper es un componente que renderiza el componente que se le pasa como children   
         return (
             <Provider store={store}>
                 <Router>
@@ -21,7 +21,7 @@ function reducer(ui,
             </Provider>
         );
     }
-    return rtlRender(ui, { wrapper: Wrapper, ...renderOptions});
+    return rtlRender(ui, { wrapper: Wrapper, ...renderOptions}); // Renderizamos el componente pasado como children con las opciones de renderizado
 }
 
 export * from '@testing-library/react'

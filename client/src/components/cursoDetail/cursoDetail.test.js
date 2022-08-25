@@ -1,47 +1,32 @@
-import {screen, render, fireEvent} from '@testing-library/react';
-import { Provider } from 'react-redux';
-import * as ReactRedux from 'react-redux';
-import CursoDetail from './CursoDetail'
-import { configure, shallow, mount } from "enzyme";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { screen, fireEvent, reducer } from '../../Helpers/util';
 import configureStore from 'redux-mock-store';
 import axios from 'axios';
-import nock from 'nock';
-import isReact from 'is-react';
 import thunk from 'redux-thunk';
 import * as data from '../../db.json'
-import { MemoryRouter } from 'react-router-dom'
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
-
-configure({ adapter: new Adapter() });
+import CursoDetail from './CursoDetail';
 
 describe('<CursoDetail />', () => {
-    let cursoDetail, state, store;
+
+    let cursoDetail, state, store, component;
     const mockStore = configureStore([thunk])
-    let cursos = data.cursos
+    let cursos = data.cursos[0];
     state = { 
         cursos: []
     }
     store = mockStore(state)
 
     beforeEach(() => {
-
-        const apiMock = nock('http://localhost:3001').persist();
-
-        apiMock.get("/cursos").reply(200, data.cursos);
-
         cursoDetail = (cursos) => 
-        mount(
-            <Provider store={store}>
-                    <CursoDetail 
-                        name={cursos.name}
-                        description={cursos.description}
-                        image={cursos.image}
-                        id={cursos.id}
-                    />
-            </Provider>
-        )
+        reducer(
+            <CursoDetail 
+                name={cursos.name}
+                description={cursos.description}
+                id={cursos.id}
+                image={cursos.image}
+            />
+        )   
     });
 
     afterEach(() => {
@@ -49,81 +34,50 @@ describe('<CursoDetail />', () => {
     }),
 
     it('should render correctly', () => {
-        const { container } = render(
-            <Provider store={store}>
-                <CursoDetail 
-                    name={cursos.name}
-                    description={cursos.description}
-                    image={cursos.image}
-                    id={cursos.id}
-                />
-            </Provider>
-        );
+        const { container } = cursoDetail(cursos);
         expect(container).toMatchSnapshot();
     })
 
-    describe('Estructura', () => {
+    it('shoulds render a div contenedor', () => {
+        const { container } = cursoDetail(cursos);
+        expect(container.querySelector('div')).toBeInTheDocument();
+    })
 
-        it('shoulds render a div contenedor', () => {
-            const { container } = render(
-                <Provider store={store}>
-                    <CursoDetail
-                        name={cursos.name}
-                        description={cursos.description}
-                        image={cursos.image}
-                        id={cursos.id}
-                    />
-                </Provider>
-            );
-            expect(container.querySelector('div')).toBeInTheDocument();
+    it('should render a button to open the modal', () => {
+        cursoDetail(cursos);
+        const button = screen.queryByText('Mas informacion aqui')
+        expect(button).toBeInTheDocument()
+    })
+
+    describe('Modal', () => {
+
+        it('should render the curso name', () =>{
+            cursoDetail(cursos);
+            fireEvent.click(screen.getByText('Mas informacion aqui'));
+            expect(screen.getByRole('heading')).toHaveTextContent(cursos.name);
         })
 
         it('shouls render a curso image', () =>{
-            const { container } = render(
-                <Provider store={store}>
-                    <CursoDetail
-                        name={cursos.name}
-                        description={cursos.description}
-                        image={cursos.image}
-                        id={cursos.id}
-                    />
-                </Provider>
-            );
+            cursoDetail(cursos);
             fireEvent.click(screen.getByText('Mas informacion aqui'));
+            expect(screen.getByRole('img')).toHaveClass('boxForImage2'); 
             expect(screen.getByAltText('imagen del curso')).toBeInTheDocument(); 
         })
 
+        it('should render a curso description', () =>{
+            cursoDetail(cursos);
+            fireEvent.click(screen.getByText('Mas informacion aqui'));
+            expect(screen.getAllByText(cursos.description).at(0)).toBeInTheDocument();
+        })
+
         it('shoulds render a form to edit', () =>{
-            const { container } = render(
-                <Provider store={store}>
-                    <CursoDetail
-                        name={cursos.name}
-                        description={cursos.description}
-                        image={cursos.image}
-                        id={cursos.id}
-                    />
-                </Provider>
-            );
+            cursoDetail(cursos);
             fireEvent.click(screen.getByText('Mas informacion aqui'));
             fireEvent.click(screen.getByText('Editar'));
             expect(screen.getByPlaceholderText('Nombre del curso')).toBeInTheDocument();
             expect(screen.getByPlaceholderText('Descripcion del curso')).toBeInTheDocument();
             expect(screen.getByPlaceholderText('Url de la imagen')).toBeInTheDocument();
-        })
-
-        it('should render the curso name in h5', () =>{
-            const { container } = render(
-                <Provider store={store}>
-                    <CursoDetail
-                        name={cursos.name}
-                        description={cursos.description}
-                        image={cursos.image}
-                        id={cursos.id}
-                    />
-                </Provider>
-            );
-            fireEvent.click(screen.getByText('Mas informacion aqui'));
-            expect(screen.getByRole('heading')).toBeInTheDocument();
+            expect(screen.getByText('Guardar')).toBeInTheDocument();
         })
         
     })
