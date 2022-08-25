@@ -7,7 +7,7 @@ Este proyecto fue diseñado para una prueba en donde se desarrollo un aplicacion
 
 ## Objetivos del proyecto
 Crear un software en una semana, en el cual se deberia poder
-listar, eliminar, crear y modificar los cursos
+listar, eliminar, crear y modificar los cursos.
 
 ## Stack de tecnologias
 
