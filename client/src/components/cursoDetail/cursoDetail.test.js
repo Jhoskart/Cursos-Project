@@ -9,7 +9,7 @@ import CursoDetail from './CursoDetail';
 
 describe('<CursoDetail />', () => {
 
-    let cursoDetail, state, store, component;
+    let cursoDetail, state, store;
     const mockStore = configureStore([thunk])
     let cursos = data.cursos[0];
     state = { 

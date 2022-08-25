@@ -1,57 +1,47 @@
-import {screen, render, fireEvent} from '@testing-library/react';
-import { Provider } from 'react-redux';
-import CreateConnected from './CreateCurso.jsx'; 
-import ListadoDeCursos from '../listadoDeCursos/ListadoDeCursos'
-import store  from '../../redux/store/store';
-import { configure, shallow, mount } from "enzyme";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import {screen, fireEvent, reducer, render} from '../../Helpers/util';
 import configureStore from 'redux-mock-store';
-import { getCursos } from '../../redux/slice/cursosSlice';
+import thunk from 'redux-thunk';
 import axios from 'axios';
+import * as data from '../../db.json'
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
-configure({ adapter: new Adapter() });
+import CreateConnected from './CreateCurso.jsx';
+
 
 describe('CreateCursos', () => {
-    let wrapper;
+    let createCurso, state, store;
+    const mockStore = configureStore([thunk])
+    let cursos = data.cursos[0];
+    state = { 
+        cursos: []
+    }
+    store = mockStore(state)
+    
     beforeEach(() => {
-        wrapper = shallow(
-            <Provider store={store}>
-                <CreateConnected />
-            </Provider>
+        createCurso = () => 
+        reducer(
+            <CreateConnected />
         );
     })
 
     it('should render correctly', () => {
-        const { container } = render(
-            <Provider store={store}>
-                <CreateConnected />
-            </Provider>
-        );
+        const { container } = createCurso();
         expect(container).toMatchSnapshot();
     })
 
     it(' should render a button to create a curso', () => {
-        const { container } = render(
-            <Provider store={store}>
-                <CreateConnected />
-            </Provider>
-        );
+        createCurso();
         expect(screen.getByText('Crear Curso')).toBeInTheDocument();
     })
 
     it('should render a Modal to create a curso and have a form', () => {
-        const { container } = render(
-            <Provider store={store}>
-                <CreateConnected />
-            </Provider>
-        );
-        
+        createCurso();
         fireEvent.click(screen.getByText('Crear Curso'));
         expect(screen.getByRole('dialog')).toBeInTheDocument(); 
         expect(screen.getByPlaceholderText('Nombre del curso')).toBeInTheDocument();
         expect(screen.getByPlaceholderText('Descripcion del curso')).toBeInTheDocument();
         expect(screen.getByPlaceholderText('Imagen del curso')).toBeInTheDocument();
+        expect(screen.getByText('Guardar')).toBeInTheDocument();
     })
 
 });
