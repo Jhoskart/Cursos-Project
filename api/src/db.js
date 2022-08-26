@@ -23,7 +23,7 @@ fs.readdirSync(path.join(__dirname, '/models'))
 
 // Inyectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
-// Capitalizamos los nombres de los modelos ie: product => Product
+// Capitalizamos los nombres de los modelos ie: cursos => Curso
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
@@ -35,6 +35,6 @@ const { Cursos } = sequelize.models;
 // Aca vendrian las relaciones
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  ...sequelize.models, // para poder importar los modelos así: const { Cursos } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };
