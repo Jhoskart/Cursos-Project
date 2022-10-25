@@ -6,11 +6,9 @@
 
 div h1 {
     color: aliceblue;
-    margin-left: 45rem;
     font-family: monospace;
+    text-align: center;
 }
 
-.margin3 {
-    margin-top: 2rem;
-    align-items: center;
-}
+
+

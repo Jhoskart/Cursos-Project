@@ -14,7 +14,7 @@ export default function ListadoDeCursos() {
     } , [dispatch])
 
     return (
-        <div className="margin3">
+        <div className="margin-3">
             <h1>Listado de Cursos👽</h1>
             <div className="content">
                 {cursos?.map(curso => (
